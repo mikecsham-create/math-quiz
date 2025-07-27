@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ontario Math Quiz - Grade 7 & 8 Curriculum</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-calculator"></i> Ontario Math Quiz</h1>
+                <p class="subtitle">Grade 7 & 8 Curriculum-Based Math Practice</p>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="welcome-section">
+                <h2>Welcome to Ontario Math Quiz!</h2>
+                <p>Practice math concepts from the Ontario Grade 7 and 8 curriculum with automatically graded quizzes. Each quiz contains 20 questions tailored to specific math units.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Auto-graded quizzes</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-download"></i>
+                        <span>CSV data export</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-book"></i>
+                        <span>Curriculum-aligned</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-clock"></i>
+                        <span>Instant feedback</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-selector">
+                <h3>Select Your Grade and Math Unit</h3>
+                
+                <div class="student-info">
+                    <h4>Student Information (Optional)</h4>
+                    <div class="form-group">
+                        <input type="text" id="studentName" placeholder="Enter your name">
+                        <input type="email" id="studentEmail" placeholder="Enter your email">
+                    </div>
+                </div>
+
+                <div class="grade-selector">
+                    <h4>Select Grade</h4>
+                    <div class="grade-buttons">
+                        <button class="grade-btn" data-grade="7">Grade 7</button>
+                        <button class="grade-btn" data-grade="8">Grade 8</button>
+                    </div>
+                </div>
+
+                <div class="units-container" id="unitsContainer">
+                    <h4>Select Math Unit</h4>
+                    <div id="unitsList" class="units-grid">
+                        <p class="select-grade-message">Please select a grade first</p>
+                    </div>
+                </div>
+
+                <div class="start-section" id="startSection" style="display: none;">
+                    <button id="startQuizBtn" class="start-btn">
+                        <i class="fas fa-play"></i>
+                        Start Quiz (20 Questions)
+                    </button>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h3>Data Export & Administration</h3>
+                <div class="admin-buttons">
+                    <button id="exportBtn" class="admin-btn">
+                        <i class="fas fa-download"></i>
+                        Export Quiz Data to CSV
+                    </button>
+                    <button id="statsBtn" class="admin-btn">
+                        <i class="fas fa-chart-bar"></i>
+                        View Statistics
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Ontario Math Quiz - Aligned with Ontario Mathematics Curriculum</p>
+        </footer>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="exportModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closeExportModal">&times;</span>
+            <h3>Export Quiz Data</h3>
+            <form id="exportForm">
+                <div class="form-group">
+                    <label for="exportEmail">Email address to send CSV:</label>
+                    <input type="email" id="exportEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="filterGrade">Filter by Grade (optional):</label>
+                    <select id="filterGrade">
+                        <option value="">All Grades</option>
+                        <option value="7">Grade 7</option>
+                        <option value="8">Grade 8</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="filterUnit">Filter by Unit (optional):</label>
+                    <select id="filterUnit">
+                        <option value="">All Units</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateFrom">From Date (optional):</label>
+                    <input type="date" id="dateFrom">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateTo">To Date (optional):</label>
+                    <input type="date" id="dateTo">
+                </div>
+                
+                <button type="submit" class="export-submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Send CSV Export
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Statistics Modal -->
+    <div id="statsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" id="closeStatsModal">&times;</span>
+            <h3>Quiz Statistics</h3>
+            <div id="statsContent">
+                <div class="loading">Loading statistics...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Generating your quiz...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

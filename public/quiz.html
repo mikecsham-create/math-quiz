@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz - Ontario Curriculum</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-calculator"></i> Ontario Math Quiz</h1>
+                <div class="quiz-header-info">
+                    <span id="quizTitle">Loading Quiz...</span>
+                    <div class="quiz-progress">
+                        <span id="progressText">Question 1 of 20</span>
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main quiz-main">
+            <!-- Quiz Instructions -->
+            <div id="quizInstructions" class="quiz-instructions">
+                <h3>Quiz Instructions</h3>
+                <p id="instructionsText">Loading instructions...</p>
+                <div class="quiz-info">
+                    <div class="info-item">
+                        <i class="fas fa-questions"></i>
+                        <span>20 Questions</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>No time limit</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-check"></i>
+                        <span>Instant feedback</span>
+                    </div>
+                </div>
+                <button id="beginQuizBtn" class="start-btn">
+                    <i class="fas fa-play"></i>
+                    Begin Quiz
+                </button>
+            </div>
+
+            <!-- Quiz Questions -->
+            <div id="quizQuestions" class="quiz-questions" style="display: none;">
+                <div class="question-navigation">
+                    <button id="prevQuestion" class="nav-btn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                        Previous
+                    </button>
+                    <span id="questionCounter">Question 1 of 20</span>
+                    <button id="nextQuestion" class="nav-btn">
+                        Next
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="question-container">
+                    <div class="question-content">
+                        <h3 id="currentQuestionText">Loading question...</h3>
+                        <div class="answer-input">
+                            <input type="text" id="answerInput" placeholder="Enter your answer" autocomplete="off">
+                            <div class="input-help">
+                                <small>For fractions, use format: 3/4</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-grid" id="questionGrid">
+                    <!-- Question grid will be populated by JavaScript -->
+                </div>
+
+                <div class="quiz-actions">
+                    <button id="submitQuizBtn" class="submit-btn" style="display: none;">
+                        <i class="fas fa-paper-plane"></i>
+                        Submit Quiz for Grading
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Results -->
+            <div id="quizResults" class="quiz-results" style="display: none;">
+                <div class="results-header">
+                    <h2><i class="fas fa-trophy"></i> Quiz Complete!</h2>
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span id="scorePercentage">0%</span>
+                        </div>
+                        <div class="score-details">
+                            <p id="scoreText">0 out of 20 correct</p>
+                            <p id="gradeText">Grade: F</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-summary">
+                    <div class="summary-item correct">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="correctCount">0</span>
+                        <small>Correct</small>
+                    </div>
+                    <div class="summary-item incorrect">
+                        <i class="fas fa-times-circle"></i>
+                        <span id="incorrectCount">0</span>
+                        <small>Incorrect</small>
+                    </div>
+                    <div class="summary-item time">
+                        <i class="fas fa-clock"></i>
+                        <span id="timeSpent">0</span>
+                        <small>Seconds</small>
+                    </div>
+                </div>
+
+                <div class="results-actions">
+                    <button id="reviewAnswersBtn" class="review-btn">
+                        <i class="fas fa-eye"></i>
+                        Review Answers
+                    </button>
+                    <button id="newQuizBtn" class="new-quiz-btn">
+                        <i class="fas fa-redo"></i>
+                        Take New Quiz
+                    </button>
+                    <button id="homeBtn" class="home-btn">
+                        <i class="fas fa-home"></i>
+                        Back to Home
+                    </button>
+                </div>
+
+                <!-- Detailed Results -->
+                <div id="detailedResults" class="detailed-results" style="display: none;">
+                    <h3>Detailed Results</h3>
+                    <div id="detailedResultsList">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Ontario Math Quiz - Grade 7 & 8 Curriculum</p>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p id="loadingText">Loading quiz...</p>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Submit Quiz?</h3>
+            <p>Are you sure you want to submit your quiz? You have answered <span id="answeredCount">0</span> out of 20 questions.</p>
+            <div class="modal-actions">
+                <button id="confirmSubmit" class="confirm-btn">Yes, Submit</button>
+                <button id="cancelSubmit" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
